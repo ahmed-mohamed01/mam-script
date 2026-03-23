@@ -84,10 +84,10 @@ def fetch_bonus_points() -> int:
 
 async def main():
     W = 52
-    border = "═" * W
-    print(f"\n╔{border}╗")
-    print(f"║{'MAM Automation Script':^{W}}║")
-    print(f"╚{border}╝\n")
+    border = "=" * (W + 2)
+    print(f"\n+{border}+")
+    print(f"| {'MAM Automation Script':^{W}} |")
+    print(f"+{border}+\n")
 
     # Validate credentials
     if not MAM_ID:
@@ -267,19 +267,19 @@ async def main():
 
     # ── Summary ───────────────────────────────────────────────────────────
     W = 52
-    border = "═" * W
-    print(f"╔{border}╗")
-    print(f"║{'SUMMARY':^{W}}║")
-    print(f"╠{border}╣")
-    print(f"║  {'Starting bonus points:':<28}{starting_bp:>{W-30},}  ║")
-    print(f"║  {'Final bonus points:':<28}{bonus_points:>{W-30},}  ║")
-    print(f"║  {'Vault contribution:':<28}{vault_contrib + vault_donated:>{W-30},}  ║")
-    print(f"╠{border}╣")
+    border = "=" * (W + 2)
+    print(f"+{border}+")
+    print(f"| {'SUMMARY':^{W}} |")
+    print(f"+{border}+")
+    print(f"| {'Starting bonus points:':<28}{starting_bp:>{W-28},} |")
+    print(f"| {'Final bonus points:':<28}{bonus_points:>{W-28},} |")
+    print(f"| {'Vault contribution:':<28}{vault_contrib + vault_donated:>{W-28},} |")
+    print(f"+{border}+")
     for action in actions:
-        print(f"║  • {action:<{W-4}}║")
+        print(f"|  - {action:<{W-2}} |")
     if not actions:
-        print(f"║  {'• No actions taken':<{W-2}}║")
-    print(f"╚{border}╝\n")
+        print(f"|  {'- No actions taken':<{W}} |")
+    print(f"+{border}+\n")
 
 if __name__ == "__main__":
     asyncio.run(main())
