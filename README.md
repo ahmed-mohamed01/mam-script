@@ -2,8 +2,8 @@
 
 Automates MyAnonamouse bonus point management:
 
-1. **Vault first** — tops up Millionaires Vault contribution to 2,000
-2. **Then max GB** — buys maximum upload credit with remaining points
+1. **Vault first** - tops up Millionaires Vault contribution to 2,000
+2. **Then max GB** - buys maximum upload credit with remaining points
 
 Runs via `docker run` and executes, prints results, exits. No persistent container needed.
 

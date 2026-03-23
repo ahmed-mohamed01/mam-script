@@ -1,5 +1,5 @@
 #!/bin/bash
-# MAM Automation — Unraid User Script
+# MAM Automation - Unraid User Script
 # Schedule: daily (Custom cron or preset)
 #
 # Edit these three values:

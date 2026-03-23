@@ -83,15 +83,17 @@ def fetch_bonus_points() -> int:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 async def main():
-    print("\n╔══════════════════════════════════════╗")
-    print("║       MAM Automation Script          ║")
-    print("╚══════════════════════════════════════╝\n")
+    W = 52
+    border = "═" * W
+    print(f"\n╔{border}╗")
+    print(f"║{'MAM Automation Script':^{W}}║")
+    print(f"╚{border}╝\n")
 
     # Validate credentials
     if not MAM_ID:
-        print("  ❌  MAM_ID missing from secrets.env"); sys.exit(1)
+        print("  ❌  MAM_ID environment variable not set"); sys.exit(1)
     if not EMAIL or not PASSWORD:
-        print("  ❌  MAM_USER/MAM_PASS missing from secrets.env"); sys.exit(1)
+        print("  ❌  MAM_USER/MAM_PASS environment variables not set"); sys.exit(1)
 
     # ── 1. Get bonus points ───────────────────────────────────────────────
     print("[1] Fetching bonus points …")
@@ -264,18 +266,20 @@ async def main():
         await browser.close()
 
     # ── Summary ───────────────────────────────────────────────────────────
-    print("╔══════════════════════════════════════╗")
-    print("║            SUMMARY                   ║")
-    print("╠══════════════════════════════════════╣")
-    print(f"║  Starting bonus points:  {starting_bp:>10,} ║")
-    print(f"║  Final bonus points:     {bonus_points:>10,} ║")
-    print(f"║  Vault contribution:     {vault_contrib + vault_donated:>10,} ║")
-    print("╠══════════════════════════════════════╣")
+    W = 52
+    border = "═" * W
+    print(f"╔{border}╗")
+    print(f"║{'SUMMARY':^{W}}║")
+    print(f"╠{border}╣")
+    print(f"║  {'Starting bonus points:':<28}{starting_bp:>{W-30},}  ║")
+    print(f"║  {'Final bonus points:':<28}{bonus_points:>{W-30},}  ║")
+    print(f"║  {'Vault contribution:':<28}{vault_contrib + vault_donated:>{W-30},}  ║")
+    print(f"╠{border}╣")
     for action in actions:
-        print(f"║  • {action:<33}║")
+        print(f"║  • {action:<{W-4}}║")
     if not actions:
-        print("║  • No actions taken                  ║")
-    print("╚══════════════════════════════════════╝\n")
+        print(f"║  {'• No actions taken':<{W-2}}║")
+    print(f"╚{border}╝\n")
 
 if __name__ == "__main__":
     asyncio.run(main())
