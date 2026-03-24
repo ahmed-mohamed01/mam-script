@@ -101,9 +101,29 @@ async def main():
     actions = []
     starting_bp = bonus_points
 
+    # ── Early exit: skip browser if nothing can be done ──────────────────
+    if bonus_points < 100:
+        print(f"[2] Skipping browser — only {bonus_points:,} points (need 100 to donate, 500 for GB)\n")
+        actions.append(f"Skipped — only {bonus_points:,} points available")
+
+        print("=" * 45)
+        print("SUMMARY")
+        print("=" * 45)
+        print(f"  Starting bonus points:  {starting_bp:>10,}")
+        print(f"  Final bonus points:     {bonus_points:>10,}")
+        print("-" * 45)
+        for action in actions:
+            print(f"  - {action}")
+        print("=" * 45)
+        print()
+        return
+
     # ── 2. Playwright session ─────────────────────────────────────────────
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(
+            headless=True,
+            args=["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"]
+        )
         context = await browser.new_context()
         page    = await context.new_page()
 
